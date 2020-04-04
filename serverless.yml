@@ -39,3 +39,4 @@ functions:
             name: customAuthorizer
             type: request
             resultTtlInSeconds: 0
+            identitySource: method.request.querystring.allow
