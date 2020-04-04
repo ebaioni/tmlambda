@@ -1,0 +1,43 @@
+{
+  "name": "tmlambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jest src/",
+    "build": "npx babel src --out-dir lib",
+    "lint": "./node_modules/.bin/eslint src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ebaioni/tmlambda.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ebaioni/tmlambda/issues"
+  },
+  "homepage": "https://github.com/ebaioni/tmlambda#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "aws-sdk": "^2.653.0",
+    "aws-sdk-mock": "^5.1.0",
+    "babel-jest": "^25.2.6",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.2.7",
+    "prettier": "^2.0.2",
+    "serverless-content-encoding": "^1.1.0",
+    "serverless-plugin-tracing": "^2.0.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.2",
+    "regenerator-runtime": "^0.13.5"
+  }
+}

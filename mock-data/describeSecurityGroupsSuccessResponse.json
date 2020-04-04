@@ -1,0 +1,122 @@
+{
+  "SecurityGroups": [        {
+    "Description": "Modlin SSL access",
+    "GroupName": "Coporate-website-ELB-CorporateSecurityGroup-164Q78X4JBIEO",
+    "IpPermissions": [
+      {
+        "FromPort": 80,
+        "IpProtocol": "tcp",
+        "IpRanges": [
+          {
+            "CidrIp": "0.0.0.0/0"
+          }
+        ],
+        "Ipv6Ranges": [],
+        "PrefixListIds": [],
+        "ToPort": 80,
+        "UserIdGroupPairs": []
+      },
+      {
+        "FromPort": 443,
+        "IpProtocol": "tcp",
+        "IpRanges": [
+          {
+            "CidrIp": "0.0.0.0/0"
+          }
+        ],
+        "Ipv6Ranges": [],
+        "PrefixListIds": [],
+        "ToPort": 443,
+        "UserIdGroupPairs": []
+      }
+    ],
+    "OwnerId": "943767556857",
+    "GroupId": "sg-b00c84c9",
+    "IpPermissionsEgress": [
+      {
+        "FromPort": 1,
+        "IpProtocol": "tcp",
+        "IpRanges": [
+          {
+            "CidrIp": "0.0.0.0/0"
+          }
+        ],
+        "Ipv6Ranges": [],
+        "PrefixListIds": [],
+        "ToPort": 65535,
+        "UserIdGroupPairs": []
+      }
+    ],
+    "Tags": [
+      {
+        "Key": "aws:cloudformation:stack-name",
+        "Value": "Coporate-website-ELB"
+      },
+      {
+        "Key": "aws:cloudformation:logical-id",
+        "Value": "CorporateSecurityGroup"
+      },
+      {
+        "Key": "aws:cloudformation:stack-id",
+        "Value": "arn:aws:cloudformation:ap-southeast-2:943767556857:stack/Coporate-website-ELB/bf533760-32ed-11e8-9d4f-50fa57536cfe"
+      }
+    ],
+    "VpcId": "vpc-f6676992"
+  },
+    {
+      "Description": "RedisElasticacheSecGroup",
+      "GroupName": "staging-RedisElasticacheSecGroup",
+      "IpPermissions": [
+        {
+          "FromPort": 6379,
+          "IpProtocol": "tcp",
+          "IpRanges": [
+            {
+              "CidrIp": "10.0.0.0/16"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "ToPort": 6379,
+          "UserIdGroupPairs": []
+        }
+      ],
+      "OwnerId": "943767556857",
+      "GroupId": "sg-b44144cc",
+      "IpPermissionsEgress": [
+        {
+          "FromPort": 0,
+          "IpProtocol": "tcp",
+          "IpRanges": [
+            {
+              "CidrIp": "0.0.0.0/0"
+            }
+          ],
+          "Ipv6Ranges": [],
+          "PrefixListIds": [],
+          "ToPort": 65535,
+          "UserIdGroupPairs": []
+        }
+      ],
+      "Tags": [
+        {
+          "Key": "aws:cloudformation:logical-id",
+          "Value": "ServerlessElasticacheSecGroup"
+        },
+        {
+          "Key": "aws:cloudformation:stack-id",
+          "Value": "arn:aws:cloudformation:ap-southeast-2:943767556857:stack/CacheFiller-staging/7ea649b0-bc76-11e8-8c4e-50fae957fcba"
+        },
+        {
+          "Key": "aws:cloudformation:stack-name",
+          "Value": "CacheFiller-staging"
+        },
+        {
+          "Key": "STAGE",
+          "Value": "staging"
+        }
+      ],
+      "VpcId": "vpc-67933700"
+    }
+  ]
+}
