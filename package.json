@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest src/",
+    "test": "./node_modules/.bin/jest --collect-coverage src/",
     "build": "npx babel src --out-dir lib",
-    "lint": "./node_modules/.bin/eslint src/"
+    "lint": "./node_modules/.bin/eslint src/",
+    "postinstall": "chmod +x ./scripts/postinstall.sh && sh ./scripts/postinstall.sh"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1585979622031" clover="3.2.0">
+  <project timestamp="1585979622031" name="All files">
+    <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="2" methods="6" coveredmethods="6" elements="21" coveredelements="19" complexity="0" loc="11" ncloc="11" packages="1" files="2" classes="2"/>
+    <file name="ApiResponseHelper.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/ApiResponseHelper.js">
+      <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="33" count="1" type="stmt"/>
+    </file>
+    <file name="getEC2SecGroups.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/getEC2SecGroups.js">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="8" count="2" type="stmt"/>
+      <line num="9" count="2" type="stmt"/>
+      <line num="10" count="2" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
