@@ -1,0 +1,6 @@
+{
+  "queryStringParameters": {
+    "allow": "yes"
+  },
+  "methodArn": "methodArn"
+}

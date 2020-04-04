@@ -1,23 +1,5 @@
 service: trlambda
 
-#resources:
-#  Resources:
-#    GatewayResponseDefault4XX:
-#      Type: 'AWS::ApiGateway::GatewayResponse'
-#      Properties:
-#        ResponseParameters:
-#          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
-#        ResponseType: DEFAULT_4XX
-#        RestApiId:
-#          Ref: 'ApiGatewayRestApi'
-#    GatewayResponseDefault5XX:
-#      Type: 'AWS::ApiGateway::GatewayResponse'
-#      Properties:
-#        ResponseParameters:
-#          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
-#        ResponseType: DEFAULT_5XX
-#        RestApiId:
-#          Ref: 'ApiGatewayRestApi'
 provider:
   name: aws
   tracing: true
@@ -40,11 +22,20 @@ custom:
   stage: ${opt:stage, self:provider.stage}
 
 functions:
+  customAuthorizer:
+    handler: lib/authorizer.index
   getEC2SecGroups:
-    environment:
     timeout: 30
     handler:  lib/getEC2SecGroups.index
     events:
       - http:
           path: /ec2/secgroups
           method: get
+          request:
+            parameters:
+              querystrings:
+                allow: false
+          authorizer:
+            name: customAuthorizer
+            type: request
+            resultTtlInSeconds: 0
