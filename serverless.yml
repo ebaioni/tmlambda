@@ -1,5 +1,17 @@
 service: trlambda
 
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+
 provider:
   name: aws
   tracing: true
@@ -24,6 +36,7 @@ custom:
 functions:
   customAuthorizer:
     handler: lib/authorizer.index
+    cors: true
   getEC2SecGroups:
     timeout: 30
     handler:  lib/getEC2SecGroups.index
@@ -31,6 +44,7 @@ functions:
       - http:
           path: /ec2/secgroups
           method: get
+          cors: true
           request:
             parameters:
               querystrings:

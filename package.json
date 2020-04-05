@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest --collect-coverage src/",
     "build": "npx babel src --out-dir lib",
+    "e2e:staging": "node_modules/newman/bin/newman.js run ./e2e-tests/TrendMicro.postman_collection.json",
     "lint": "./node_modules/.bin/eslint src/",
-    "postinstall": "chmod +x ./scripts/postinstall.sh && sh ./scripts/postinstall.sh"
+    "postinstall": "chmod +x ./scripts/postinstall.sh && sh ./scripts/postinstall.sh",
+    "test": "./node_modules/.bin/jest --collect-coverage src/",
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-prettier": "^3.1.2",
     "jest": "^25.2.7",
+    "newman": "^4.6.0",
     "prettier": "^2.0.2",
     "serverless-content-encoding": "^1.1.0",
     "serverless-plugin-tracing": "^2.0.0"
