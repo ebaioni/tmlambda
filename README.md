@@ -59,9 +59,10 @@ Remote Invoker
 - There is an "extra" folder inside src
     - Some AWS Services APIs automatically add pagination, so it is important to account for it and the code in `extra` does so
     - I classified it as extra because the AWS documentation states that, if MaxResult is not set, then ALL results are returned. On the other hand they also state that MaxResult has to be a number between 5 and 1000.
-        - I wonder what is going to happen if an account has 1010 sec groups and MaxResult is not set but, of course, mine is no-where close to that number so I've simulated the pagination by setting a low value to MaxResult. I duplicated some code on purpose because I didn't want to include an extra as part of the required solution.
-- Making the response complaint to JSON:API 1.0 will require a change in the payload structure and server headers, with changes required across both the unit and e2e tests.
-Instead of updating everything, I have added a second endpoint and made more additions to helper classes. It's presented as [PR](https://github.com/ebaioni/tmlambda/pull/1)
+        - I wonder what is going to happen if an account has 1000+ sec groups and MaxResult is not set but, of course, mine is no-where close to that number so I've simulated the pagination by setting a low value to MaxResult. I duplicated some code on purpose because I didn't want to include an extra as part of the required solution.
+- Making the response complaint to JSON:API 1.0 will require a change in the payload structure and server headers, with changes required across both the unit and e2e tests. 
+    - Instead of updating everything, I've added a second end point with a smaller compatible payload.
+    - The Client Validation headers and appropriate responses should be moved somewhere else. Ideally we would make API GW handle this for us, alternatively we could have a middleware to avoid replicating code
 
 ## Project Requirements
 - Create a Serverless application. ✅
