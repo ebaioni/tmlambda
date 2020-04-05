@@ -56,7 +56,11 @@ Remote Invoker
     - Test on appropriate response headers
     - Test on api response time. This could fail when the request requires a lambda cold start.
     - Both for success and failure responses, the payload is verified against a JSON schema so that consistency is ensured.
-
+- There is an "extra" folder inside src
+    - Some AWS Services automatically add pagination so it is important to account for it and the code in extra does
+    - I classified it as extra because the AWS documentation states that, if MaxResult is not set, then ALL results are returned. On the other hand they also state that MaxResult has to be a number between 5 and 1000.
+        - I genuinely wonder what is going to happen if an account has 1010 sec groups and MaxResult is not set but, of course, mine is no-where close to that number so I've simulated the pagination by setting a low value to MaxResult. I duplicated some code on purpose because I didn't want to include an extra as part of the required solution.
+- Making the response complaint to JSON:API 1.0 will require a change in the payload structure and server headers, with changes required across both the unit and e2e tests. Instead of updating everything, I'm considering adding a second end point with a smaller payload to be complaint
 ## Project Requirements
 - Create a Serverless application. ✅
     - More info: https://serverless.com/framework/docs/providers/aws/events/apigateway#configuring-endpoint-types
@@ -69,3 +73,4 @@ Remote Invoker
     - More info: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
 - Write an end-to-end API test for the endpoint. ✅
 - Make response JSON:API 1.0 (https://jsonapi.org/format/1.0/) compatible. [Pending]
+
