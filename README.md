@@ -36,31 +36,33 @@ Remote Invoker
 
 ## How to run tests
 - `npm run test` <- will run jest unit tests
-- `npm run e2e:staging` <- will run e2e tests. **Note** the should be run by the CI/CD pipeline after the code is deployed, otherwise we would be testing that the old code. I put it in here for a lack of alternative
+- `npm run e2e:staging` <- will run e2e tests. **Note** this should be run by the CI/CD pipeline after the code is deployed, otherwise we would be testing that the old code.
 
 ## Comments & possible improvements
 - Authorizer: 
-    - Generally we would rather authenticate via header instead of a querystring. I assumed the point of the exercise was to show that is was possible to secure the endpoint and I chose a query parameter which should make it easier for you to verify the correctness.
-    - An alternate solution would be to have a login/authorization endpoint that returns temporary AWS credentials (so that scope and permissions can be as granular as IAM allows) and ask the client(s) the sign the requests before calling any endpoint which would require AWS_IAM authentication 
-    - Unless very specific to this microservice, I would suggest authoriser to be in a different repo.
+    - Generally we would rather authenticate via header instead of a querystring. I assumed the point of the exercise was to show that is was possible to secure the endpoint and I chose a query parameter which should make it easier for you to verify the correctness
+    - An alternative solution would be to have a login/authorization endpoint that returns temporary AWS credentials (so that scope and permissions can be as granular as IAM allows) and ask the client(s) to sign the requests before calling any endpoint which would then require AWS_IAM authentication 
+    - Unless very specific to this microservice, I would suggest authoriser to be in a different repo
 - ApiResponseHelper:
-    - this class help formatting the response in a way that is processable by APIGW. To avoid repeating this class across different microservices, it should be moved into its own package (for example a private npm package) and pulled in by various microservices or added to a shared lambda layer
+    - This class helps formatting the response in a way that is processable by APIGW. To avoid repeating this class across different microservices, it should be moved into its own package (for example a private npm package) and pulled in by various microservices or added to a shared lambda layer
 - General CORS Headers:
-    - When developing a API we need to keep into consideration where it is going to be called from. Browsers automatically block requests that do not satisfy CORS restrictions. 
+    - When developing an API we need to consider where it is going to be called from. Browsers automatically block requests that do not satisfy CORS restrictions 
     Depending on where the API is called from, we could replace the generic * with the whitelisted domain
-- In the serverless file you'll find few options that are not explicity required in the test but help the general ongoing maintenance of the API such as enabling X-RAY tracing, rotate the logs after 30days  
+- In the serverless file you'll find few options that are not explicitly required in the test but help the general ongoing maintenance of the API such as enabling X-RAY tracing, rotate the logs after 30days  
 - A pre-push hook (with some ASCII art) is included. This helps making sure that there are no lint errors and no unit tests failing before pushing the code remotely. This does NOT mean that the CI should not run when a PR is opened, but it aims to not push code that we already know it is not up to standard
-    - To see it in action, make a small change, then commit and push.
+    - To see it in action, make a small change, then commit and push
 - Postman was used for e2e tests and the following cases have been taken into account
     - Test on appropriate response code
     - Test on appropriate response headers
-    - Test on api response time. This could fail when the request requires a lambda cold start.
-    - Both for success and failure responses, the payload is verified against a JSON schema so that consistency is ensured.
+    - Test on api response time. **This could fail when the request requires a lambda cold start**
+    - Both for success and failure responses, the payload is verified against a JSON schema so that consistency is ensured
 - There is an "extra" folder inside src
-    - Some AWS Services automatically add pagination so it is important to account for it and the code in extra does
+    - Some AWS Services APIs automatically add pagination, so it is important to account for it and the code in `extra` does so
     - I classified it as extra because the AWS documentation states that, if MaxResult is not set, then ALL results are returned. On the other hand they also state that MaxResult has to be a number between 5 and 1000.
-        - I genuinely wonder what is going to happen if an account has 1010 sec groups and MaxResult is not set but, of course, mine is no-where close to that number so I've simulated the pagination by setting a low value to MaxResult. I duplicated some code on purpose because I didn't want to include an extra as part of the required solution.
-- Making the response complaint to JSON:API 1.0 will require a change in the payload structure and server headers, with changes required across both the unit and e2e tests. Instead of updating everything, I'm considering adding a second end point with a smaller payload to be complaint
+        - I wonder what is going to happen if an account has 1010 sec groups and MaxResult is not set but, of course, mine is no-where close to that number so I've simulated the pagination by setting a low value to MaxResult. I duplicated some code on purpose because I didn't want to include an extra as part of the required solution.
+- Making the response complaint to JSON:API 1.0 will require a change in the payload structure and server headers, with changes required across both the unit and e2e tests.
+Instead of updating everything, I have added a second endpoint and made more additions to helper classes. It's presented as [PR](https://github.com/ebaioni/tmlambda/pull/1)
+
 ## Project Requirements
 - Create a Serverless application. ✅
     - More info: https://serverless.com/framework/docs/providers/aws/events/apigateway#configuring-endpoint-types
