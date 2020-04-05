@@ -69,3 +69,4 @@ functions:
             parameters:
               querystrings:
                 allow: false
+          authorizer: ${self:custom.authorizer}
