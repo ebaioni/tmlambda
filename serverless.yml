@@ -17,6 +17,8 @@ provider:
   tracing: true
   logRetentionInDays: 30
   timeout: 30
+  logs:
+    restApi: true
   httpApi:
     cors: true
 
@@ -32,6 +34,11 @@ provider:
   stage: staging
 custom:
   stage: ${opt:stage, self:provider.stage}
+  authorizer:
+    name: customAuthorizer
+    type: request
+    resultTtlInSeconds: 0
+    identitySource: method.request.querystring.allow
 
 functions:
   customAuthorizer:
@@ -49,8 +56,4 @@ functions:
             parameters:
               querystrings:
                 allow: false
-          authorizer:
-            name: customAuthorizer
-            type: request
-            resultTtlInSeconds: 0
-            identitySource: method.request.querystring.allow
+          authorizer: ${self:custom.authorizer}
