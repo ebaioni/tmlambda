@@ -74,5 +74,5 @@ Instead of updating everything, I have added a second endpoint and made more add
 - Secure the endpoint using a custom API Gateway Lambda Authoriser. ✅
     - More info: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
 - Write an end-to-end API test for the endpoint. ✅
-- Make response JSON:API 1.0 (https://jsonapi.org/format/1.0/) compatible. [Pending]
+- Make response JSON:API 1.0 (https://jsonapi.org/format/1.0/) compatible. [PR](https://github.com/ebaioni/tmlambda/pull/1)
 
