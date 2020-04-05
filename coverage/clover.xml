@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1586044932078" clover="3.2.0">
-  <project timestamp="1586044932078" name="All files">
+<coverage generated="1586045888839" clover="3.2.0">
+  <project timestamp="1586045888839" name="All files">
     <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6" elements="21" coveredelements="21" complexity="0" loc="11" ncloc="11" packages="1" files="2" classes="2"/>
     <file name="ApiResponseHelper.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/ApiResponseHelper.js">
       <metrics statements="3" coveredstatements="3" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
