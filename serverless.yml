@@ -43,7 +43,6 @@ custom:
 functions:
   customAuthorizer:
     handler: lib/authorizer.index
-    cors: true
   getEC2SecGroups:
     timeout: 30
     handler:  lib/getEC2SecGroups.index
