@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <coverage generated="1586060783210" clover="3.2.0">
   <project timestamp="1586060783210" name="All files">
     <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6" elements="21" coveredelements="21" complexity="0" loc="11" ncloc="11" packages="1" files="2" classes="2"/>
@@ -19,5 +20,91 @@
       <line num="18" count="1" type="stmt"/>
       <line num="19" count="1" type="stmt"/>
     </file>
+=======
+<coverage generated="1586169002222" clover="3.2.0">
+  <project timestamp="1586169002222" name="All files">
+    <metrics statements="54" coveredstatements="19" conditionals="28" coveredconditionals="7" methods="20" coveredmethods="7" elements="102" coveredelements="33" complexity="0" loc="54" ncloc="54" packages="2" files="7" classes="7"/>
+    <package name="src">
+      <metrics statements="47" coveredstatements="19" conditionals="26" coveredconditionals="7" methods="15" coveredmethods="7"/>
+      <file name="ApiResponseHelper.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/ApiResponseHelper.js">
+        <metrics statements="7" coveredstatements="6" conditionals="9" coveredconditionals="7" methods="3" coveredmethods="3"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="51" count="6" type="stmt"/>
+        <line num="52" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="6" type="stmt"/>
+      </file>
+      <file name="JSONAPICompatibilityHelper.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/JSONAPICompatibilityHelper.js">
+        <metrics statements="12" coveredstatements="3" conditionals="15" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="65" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="73" count="0" type="stmt"/>
+      </file>
+      <file name="getEC2SecGroups.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/getEC2SecGroups.js">
+        <metrics statements="28" coveredstatements="10" conditionals="2" coveredconditionals="0" methods="8" coveredmethods="4"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.schemas.SecurityGroups">
+      <metrics statements="7" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <file name="ipPermissionsEgressSchema.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/schemas/SecurityGroups/ipPermissionsEgressSchema.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ipPermissionsSchema.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/schemas/SecurityGroups/ipPermissionsSchema.js">
+        <metrics statements="3" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="securityGroupsSchema.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/schemas/SecurityGroups/securityGroupsSchema.js">
+        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+      </file>
+      <file name="tagSchema.js" path="/Users/enri/Desktop/projects/personal/tmlambda/src/schemas/SecurityGroups/tagSchema.js">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+    </package>
+>>>>>>> fix test
   </project>
 </coverage>
