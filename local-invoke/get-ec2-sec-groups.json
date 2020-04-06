@@ -12,7 +12,7 @@
     "CloudFront-Is-SmartTV-Viewer": "false",
     "CloudFront-Is-Tablet-Viewer": "false",
     "CloudFront-Viewer-Country": "AU",
-    "Content-Type": "application/vnd.api+json",
+    "Content-Type": "application/text",
     "Postman-Token": "f4efe440-32d5-42f1-9cd3-67e4f360218f",
     "User-Agent": "PostmanRuntime/7.1.1",
     "Via": "1.1 3b8eb886e1e5efb8338be9705dc88912.cloudfront.net (CloudFront)",

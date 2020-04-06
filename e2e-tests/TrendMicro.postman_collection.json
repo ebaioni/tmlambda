@@ -651,19 +651,81 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "https://3zgq358hrg.execute-api.ap-southeast-2.amazonaws.com/staging/ec2/secgroups?allow=yes",
+					"raw": "https://{{host}}/{{stage}}/ec2/secgroups?allow=yes",
 					"protocol": "https",
 					"host": [
-						"3zgq358hrg",
-						"execute-api",
-						"ap-southeast-2",
-						"amazonaws",
-						"com"
+						"{{host}}"
 					],
 					"path": [
-						"staging",
+						"{{stage}}",
+						"ec2",
+						"secgroups"
+					],
+					"query": [
+						{
+							"key": "allow",
+							"value": "yes",
+							"description": "value for authorisation"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEc2SecGroupsJSONAPI",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bd6be771-b9de-4ed5-9f6e-62e32d1b680c",
+						"exec": [
+							"pm.test(\"Response time is less than 1s\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is JSON API 1.0 Compatible\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\", \"application/vnd.api+json\");",
+							"});",
+							"",
+							"pm.test(\"Access-Control-Allow-Origin is present\", function () {",
+							"    pm.response.to.have.header(\"Access-Control-Allow-Origin\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://{{host}}/{{stage}}/jsonapi/ec2/secgroups?allow=yes",
+					"protocol": "https",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{stage}}",
+						"jsonapi",
 						"ec2",
 						"secgroups"
 					],
@@ -736,17 +798,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://3zgq358hrg.execute-api.ap-southeast-2.amazonaws.com/staging/ec2/secgroups?allow=no",
+					"raw": "https://{{host}}/{{stage}}/ec2/secgroups?allow=no",
 					"protocol": "https",
 					"host": [
-						"3zgq358hrg",
-						"execute-api",
-						"ap-southeast-2",
-						"amazonaws",
-						"com"
+						"{{host}}"
 					],
 					"path": [
-						"staging",
+						"{{stage}}",
 						"ec2",
 						"secgroups"
 					],

@@ -4,10 +4,20 @@ import "regenerator-runtime/runtime";
 import AWS from "aws-sdk";
 import ApiResponseHelper from "./ApiResponseHelper";
 import JSONAPICompatibilityHelper from "./JSONAPICompatibilityHelper";
+import securityGroupsSchema from "./schemas/SecurityGroups/securityGroupsSchema";
+import ipPermissionsSchema from "./schemas/SecurityGroups/ipPermissionsSchema";
+import ipPermissionsEgressSchema from "./schemas/SecurityGroups/ipPermissionsEgressSchema";
+import tagSchema from "./schemas/SecurityGroups/tagSchema";
 
+const JSONAPISerializer = require("json-api-serializer");
+
+/**
+ * Entry point for NON JSON-API-Compatible call
+ * @returns {Promise<>}
+ */
 module.exports.index = async () => {
   const ec2 = new AWS.EC2();
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     ec2
       .describeSecurityGroups()
       .promise()
@@ -17,67 +27,47 @@ module.exports.index = async () => {
       })
       .catch((e) => {
         const response = ApiResponseHelper.getServerErrorResponse(e);
-        reject(response);
+        resolve(response);
       });
   });
 };
-
+/**
+ * Entry point for JSON-API-Compatible call
+ * @returns {Promise<>}
+ */
 module.exports.indexJSONApi = async (event) => {
   const ec2 = new AWS.EC2();
-  return new Promise((resolve, reject) => {
-    if (!JSONAPICompatibilityHelper.isValidContentTypeHeader(event.headers)) {
-      const response = JSONAPICompatibilityHelper.formatError(
-        1,
-        "Unsupported Media Type",
-        null,
-        415
+  const Serializer = new JSONAPISerializer();
+  return new Promise((resolve) => {
+    const errorInHeader = JSONAPICompatibilityHelper.errorsInHeaders(
+      event.headers
+    );
+    if (errorInHeader) {
+      console.log(JSON.stringify(errorInHeader, null, 2));
+      resolve(
+        ApiResponseHelper.getCustomErrorCodeResponse(
+          parseInt(errorInHeader.errors[0].status, 10),
+          errorInHeader,
+          true
+        )
       );
-
-      reject(ApiResponseHelper.getCustomErrorCodeResponse(415, response, true));
-      return;
-    }
-    if (!JSONAPICompatibilityHelper.isValidAcceptHeader(event.headers)) {
-      const response = JSONAPICompatibilityHelper.formatError(
-        2,
-        "Not Acceptable",
-        null,
-        406
-      );
-      reject(ApiResponseHelper.getCustomErrorCodeResponse(406, response, true));
       return;
     }
     ec2
       .describeSecurityGroups()
       .promise()
       .then((secGroups) => {
-        const smallSubset = secGroups.SecurityGroups.map((sg) => {
-          return {
-            groupName: sg.GroupName,
-            groupDescription: sg.Description,
-            groupId: sg.GroupId,
-          };
-        });
-        const jsonCompatible = {
-          data: [],
-          meta: {
-            count: smallSubset.length,
-          },
-        };
-        smallSubset.forEach((sg) => {
-          const tmp = {
-            type: "securityGroups",
-            id: sg.groupId,
-            attributes: {
-              groupName: sg.groupName,
-              groupDescription: sg.groupDescription,
-              groupId: sg.groupId,
-            },
-          };
-          jsonCompatible.data.push(tmp);
-        });
-        console.log(JSON.stringify(jsonCompatible, null, 2));
+        Serializer.register("securityGroups", securityGroupsSchema);
+        // Register 'tag' type
+        Serializer.register("ipPermissions", ipPermissionsSchema);
+        Serializer.register("ipPermissionsEgress", ipPermissionsEgressSchema);
+        Serializer.register("tag", tagSchema);
+        const serialisedData = Serializer.serialize(
+          "securityGroups",
+          secGroups.SecurityGroups
+        );
 
-        const response = ApiResponseHelper.getOkResponse(jsonCompatible, true);
+        const response = ApiResponseHelper.getOkResponse(serialisedData, true);
         resolve(response);
       })
       .catch((e) => {
@@ -90,7 +80,7 @@ module.exports.indexJSONApi = async (event) => {
           ),
           true
         );
-        reject(response);
+        resolve(response);
       });
   });
 };

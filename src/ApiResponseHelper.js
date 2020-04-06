@@ -41,7 +41,7 @@ export default class ApiResponseHelper {
    * @param {number} code
    * @param {Object|String|Array} message
    * @param {boolean} includeJsonAPIHeader
-   * @returns {{headers: {"Access-Control-Allow-Origin": string, "Access-Control-Allow-Credentials": string}, body: string, statusCode: *}}
+   * @returns {{headers: Object, body: string, statusCode: *}}
    */
   static getCustomErrorCodeResponse(
     code,

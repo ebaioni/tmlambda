@@ -32,19 +32,44 @@ export default class JSONAPICompatibilityHelper {
    * @param {string} title
    * @param {String} code
    * @param {Number} status
-   * @returns {{meta: {}, errors: [{code: null, id: *, title: *}]}}
+   * @returns {{meta: Object, errors: [{code: string, id: string, title: string, status: string}]}}
    */
-  static formatError(id, title, code = null, status = null) {
+  static formatError(id, title, code = "", status = null) {
     return {
       errors: [
         {
-          id,
-          code,
-          title,
-          status,
+          id: id.toString(),
+          code: code ? code.toString() : "",
+          title: title ? title.toString() : "",
+          status: status ? status.toString() : "",
         },
       ],
       meta: {},
     };
+  }
+
+  /**
+   * Check whether request headers are valid for a JSON API 1.0 request
+   * @param {Object} headers - Request headers present in the AWS Event Object
+   * @returns {{meta: Object, errors: {code: string, id: string, title: string, status: string}[]}|null}
+   */
+  static errorsInHeaders(headers) {
+    if (!JSONAPICompatibilityHelper.isValidContentTypeHeader(headers)) {
+      return JSONAPICompatibilityHelper.formatError(
+        1,
+        "Unsupported Media Type",
+        null,
+        415
+      );
+    }
+    if (!JSONAPICompatibilityHelper.isValidAcceptHeader(headers)) {
+      return JSONAPICompatibilityHelper.formatError(
+        2,
+        "Not Acceptable",
+        null,
+        406
+      );
+    }
+    return null;
   }
 }
