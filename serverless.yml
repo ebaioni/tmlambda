@@ -56,3 +56,17 @@ functions:
               querystrings:
                 allow: false
           authorizer: ${self:custom.authorizer}
+
+  getEC2SecGroupsCompatible:
+    timeout: 30
+    handler:  lib/getEC2SecGroups.indexJSONApi
+    events:
+      - http:
+          path: /jsonapi/ec2/secgroups
+          method: get
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                allow: false
+          authorizer: ${self:custom.authorizer}

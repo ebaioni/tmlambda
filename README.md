@@ -20,7 +20,7 @@ Run the following commands:
  - `npm install`
  - `npm run build`
 
-In order to run the  getEC2SecGroups function:
+In order to run the  getEC2SecGroups function (this will run it against your AWS Account assuming your CLI is configured):
 
  - `sls invoke local -f getEC2SecGroups`
 
@@ -56,12 +56,16 @@ Remote Invoker
     - Test on appropriate response headers
     - Test on api response time. **This could fail when the request requires a lambda cold start**
     - Both for success and failure responses, the payload is verified against a JSON schema so that consistency is ensured
+    - If you want to test against your APIGw, deploy this service and then replace the host variable in ./e2e-tests/tm.postman_environment.json
+- Making the response complaint to JSON:API 1.0 will require a change in the payload structure and server headers, with changes required across both the unit and e2e tests. 
+    - Instead of updating everything, I've added a second end point that validates the headers and returns a response which is compatible with JSON API 1.0.
+    - Validator used to verify the compatibility of the payload is: https://jsonapi-validator.herokuapp.com/
+    - Ideally we would make API GW handle headers validation
 - There is an "extra" folder inside src
     - Some AWS Services APIs automatically add pagination, so it is important to account for it and the code in `extra` does so
     - I classified it as extra because the AWS documentation states that, if MaxResult is not set, then ALL results are returned. On the other hand they also state that MaxResult has to be a number between 5 and 1000.
-        - I wonder what is going to happen if an account has 1010 sec groups and MaxResult is not set but, of course, mine is no-where close to that number so I've simulated the pagination by setting a low value to MaxResult. I duplicated some code on purpose because I didn't want to include an extra as part of the required solution.
-- Making the response complaint to JSON:API 1.0 will require a change in the payload structure and server headers, with changes required across both the unit and e2e tests.
-Instead of updating everything, I have added a second endpoint and made more additions to helper classes. It's presented as [PR](https://github.com/ebaioni/tmlambda/pull/1)
+        - I wonder what is going to happen if an account has 1000+ sec groups and MaxResult is not set but, of course, mine is no-where close to that number so I've simulated the pagination by setting a low value to MaxResult. I duplicated some code on purpose because I didn't want to include an extra as part of the required solution.
+
 
 ## Project Requirements
 - Create a Serverless application. ✅
@@ -74,5 +78,5 @@ Instead of updating everything, I have added a second endpoint and made more add
 - Secure the endpoint using a custom API Gateway Lambda Authoriser. ✅
     - More info: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
 - Write an end-to-end API test for the endpoint. ✅
-- Make response JSON:API 1.0 (https://jsonapi.org/format/1.0/) compatible. [PR](https://github.com/ebaioni/tmlambda/pull/1)
+- Make response JSON:API 1.0 (https://jsonapi.org/format/1.0/) compatible. ✅
 

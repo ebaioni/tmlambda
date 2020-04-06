@@ -2,10 +2,10 @@
   "name": "tmlambda",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "build": "npx babel src --out-dir lib",
-    "e2e:staging": "node_modules/newman/bin/newman.js run ./e2e-tests/TrendMicro.postman_collection.json",
+    "e2e:staging": "node_modules/newman/bin/newman.js run ./e2e-tests/TrendMicro.postman_collection.json --environment ./e2e-tests/tm.postman_environment.json",
     "lint": "./node_modules/.bin/eslint src/",
     "postinstall": "chmod +x ./scripts/postinstall.sh && sh ./scripts/postinstall.sh",
     "test": "./node_modules/.bin/jest --collect-coverage src/"
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.2",
+    "json-api-serializer": "^2.4.0",
     "regenerator-runtime": "^0.13.5"
   }
 }

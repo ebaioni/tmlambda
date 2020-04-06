@@ -28,6 +28,6 @@ describe("EC2 Describe Security Groups", () => {
     AWS.mock("EC2", "describeSecurityGroups", function (callback) {
       callback({ error: "some AWS Error" });
     });
-    await expect(index()).rejects.toMatchObject(expectedResponse);
+    await expect(index()).resolves.toMatchObject(expectedResponse);
   });
 });

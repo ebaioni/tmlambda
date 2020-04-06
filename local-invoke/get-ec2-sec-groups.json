@@ -12,7 +12,7 @@
     "CloudFront-Is-SmartTV-Viewer": "false",
     "CloudFront-Is-Tablet-Viewer": "false",
     "CloudFront-Viewer-Country": "AU",
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "application/text",
     "Postman-Token": "f4efe440-32d5-42f1-9cd3-67e4f360218f",
     "User-Agent": "PostmanRuntime/7.1.1",
     "Via": "1.1 3b8eb886e1e5efb8338be9705dc88912.cloudfront.net (CloudFront)",
@@ -20,7 +20,7 @@
     "x-amz-date": "20180718T023213Z",
     "X-Amzn-Trace-Id": "Root=1-5b4ea6ad-49a15fa602402abc3db15c2f",
     "X-Forwarded-Port": "443",
-    "X-Forwarded-Proto": "https",
+    "X-Forwarded-Proto": "https"
   },
   "pathParameters": {
   },
